@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-6">
+
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">
+        Registrar Autor
+    </h2>
+
+    <!-- mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="mb-4 p-3 rounded text-white 
+                    {% if category == 'success' %} bg-green-500 {% endif %}
+                    {% if category == 'error' %} bg-red-500 {% endif %}
+                ">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="space-y-4">
+
+        {{ form.csrf_token }}
+
+        <div>
+            <label class="block text-gray-700">Nombre</label>
+            {{ form.nombre(class="w-full border rounded p-2 focus:ring focus:ring-blue-300") }}
+        </div>
+
+        <div>
+            <label class="block text-gray-700">Apellidos</label>
+            {{ form.apellidos(class="w-full border rounded p-2 focus:ring focus:ring-blue-300") }}
+        </div>
+
+        <div>
+            <label class="block text-gray-700">Email</label>
+            {{ form.email(class="w-full border rounded p-2 focus:ring focus:ring-blue-300") }}
+        </div>
+
+        
+  <button
+    type="submit"
+    class="px-4 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-600 hover:text-white active:scale-95 transition duration-150"
+  >
+    Guardar
+  </button>
+</form>
+
+    </form>
+</div>
+
+{% endblock %}

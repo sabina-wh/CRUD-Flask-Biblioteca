@@ -1,0 +1,123 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="max-w-6xl mx-auto mt-10">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Lista de Libros</h2>
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div
+    class="mb-4 p-3 rounded text-white {% if category == 'success' %} bg-green-500 {% endif %} {% if category == 'error' %} bg-red-500 {% endif %}"
+  >
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <form
+    class="mb-4 flex gap-2"
+    method="GET"
+    action="{{ url_for('libros_listar') }}"
+  >
+    <input
+      type="text"
+      name="q"
+      class="w-full border rounded p-2"
+      placeholder="Buscar libro..."
+      value="{{ q }}"
+    />
+    <button
+      type="submit"
+      class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
+    >
+      Buscar
+    </button>
+  </form>
+
+  {% if errors %}
+  <ul class="mb-4 text-red-600">
+    {% for error in errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <!-- TABLA -->
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+    <table class="min-w-full text-left">
+      <thead class="bg-gray-100 border-b">
+        <tr>
+          <th class="p-3">ID</th>
+          <th class="p-3">Título</th>
+          <th class="p-3">Autores</th>
+          <th class="p-3">Editor</th>
+          <th class="p-3">Fecha publicación</th>
+          <th class="p-3">Portada</th>
+          <th class="p-3">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% if libros %} {% for libro in libros %}
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ libro.id }}</td>
+          <td class="p-3">{{ libro.titulo }}</td>
+
+          <!-- AUTORES MANY TO MANY -->
+          <td class="p-3">
+            {% for autor in libro.autores %} {{ autor.nombre }} {{
+            autor.apellidos }} {% if not loop.last %}, {% endif %} {% else %}
+            <span class="text-gray-400">Sin autores</span>
+            {% endfor %}
+          </td>
+
+          <td class="p-3">{{ libro.editor.nombre }}</td>
+
+          <td class="p-3">{{ libro.fecha_publicacion }}</td>
+
+          <!-- PORTADA -->
+          <td class="p-3">
+            {% if libro.portada %}
+            <img
+              src="{{ url_for('static', filename='portadas/' + libro.portada) }}"
+              class="w-16 h-20 object-cover rounded"
+              alt="Portada"
+            />
+            {% else %}
+            <img
+              src="{{ url_for('static', filename='portadas/default.png') }}"
+              class="w-16 h-20 object-cover rounded"
+              alt="Sin portada"
+            />
+            {% endif %}
+          </td>
+
+          <!-- ACCIONES -->
+          <td class="p-3 flex gap-2">
+            <a
+              href="{{ url_for('libros_editar', id_libro=libro.id) }}"
+              class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+            >
+              Editar
+            </a>
+
+            <a
+              href="{{ url_for('libros_eliminar', id_libro=libro.id) }}"
+              class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+            >
+              Eliminar
+            </a>
+          </td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td colspan="7" class="p-4 text-center text-gray-500">
+            No se encontraron libros
+          </td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

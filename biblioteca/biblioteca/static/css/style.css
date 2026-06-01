@@ -1,0 +1,117 @@
+.btn-info-enviar
+{
+border-color:gray;
+background:#4d8fe5;
+color:white;
+border-radius: 10px;
+font-size: large;
+}
+
+/*.errorlist input, .errorlist select {
+    border: 2px red solid;
+}
+*/
+.errorlist{
+	color:red!important;
+	border: 5px red;
+}
+.btn{
+    margin-bottom: 5px;
+}
+.navbar-default{
+background:#4d8fe5 !important;
+}
+
+.navbar-default .navbar-brand {
+  color:black;
+}
+
+.navbar-default .navbar-text {
+  color:black;
+}
+.navbar-default .navbar-nav>li>a {
+  color:black;
+}
+
+
+.form-control:invalid{
+	color:#000000;
+}
+
+form.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color:red;
+}
+
+
+.form-control input,
+[type=number] {
+   -webkit-appearance: textfield !important;
+    margin: 0;
+    -moz-appearance:textfield !important;
+}
+
+input.form-control:invalid, input.form-control.is-invalid {
+  padding-right: calc(1.5em + 0.75rem);
+  /*background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);*/
+  border-color:#ff0000;
+}
+
+
+html body div.container div.bs-docs-section.clearfix div.row div.col-lg-12 div.bs-component div.container form ul.errorlist
+
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  /*border-color: var(--bs-form-invalid-border-color);*/
+  padding-right: calc(1.5em + .75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position:
+right calc(.375em + .1875rem) center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+ ul.messages{
+ font-size: 16px !important;
+ }
+
+li.alert-alert-success{
+ color:green;
+  }
+
+li.alert-alert-error{
+ color:red;
+  }
+
+li.alert-alert-warning{
+ color:yellow;
+  }
+
+img.img-libro{
+ object-position: center top;
+ width: 200px;
+ height:200px;
+}
+
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+  background-color: #e6f9f7;
+}
+
+
+.titletabla {
+font-size: 16px;
+ font-weight: bold;
+}
+
+
+p.alert.alert-dangerous{
+ color:red;
+}
+
+form div.field p label{
+  position: relative;
+  display: flex;
+}

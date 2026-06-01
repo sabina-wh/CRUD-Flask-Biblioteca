@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Biblioteca{% endblock %}</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js (interactividad) -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="bg-gray-100" x-data="{ mobileMenu: false }">
+
+<!-- NAVBAR -->
+<nav class="bg-blue-600 text-white shadow">
+
+    <div class="container mx-auto flex justify-between items-center p-4">
+
+        <!-- LOGO -->
+        <a href="{{ url_for('libros_listar') }}" class="font-bold text-lg">
+            📚 Mi Biblioteca
+        </a>
+
+        <!-- BOTÓN MOBILE -->
+        <button class="md:hidden" @click="mobileMenu = !mobileMenu">
+            ☰
+        </button>
+
+        <!-- MENU -->
+        <div class="hidden md:flex space-x-6 items-center">
+
+            <!-- LIBROS -->
+            <div class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="hover:underline">
+                    Libros
+                </button>
+
+                <div x-show="open" @click.outside="open=false"
+                     class="absolute bg-white text-black mt-2 rounded shadow w-40">
+                    <a class="block px-4 py-2 hover:bg-gray-100"
+                       href="{{ url_for('libros_crear') }}">
+                        Registrar
+                    </a>
+                    <a class="block px-4 py-2 hover:bg-gray-100"
+                       href="{{ url_for('libros_listar') }}">
+                        Ver listado
+                    </a>
+                </div>
+            </div>
+
+            <!-- AUTORES -->
+            <div class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="hover:underline">
+                    Autores
+                </button>
+
+                <div x-show="open" @click.outside="open=false"
+                     class="absolute bg-white text-black mt-2 rounded shadow w-40">
+                    <a class="block px-4 py-2 hover:bg-gray-100"
+                       href="{{ url_for('autores_crear') }}">
+                        Registrar
+                    </a>
+                    <a class="block px-4 py-2 hover:bg-gray-100"
+                       href="{{ url_for('autores_listar') }}">
+                        Ver listado
+                    </a>
+                </div>
+            </div>
+
+            <!-- EDITORES -->
+            <div class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="hover:underline">
+                    Editores
+                </button>
+
+                <div x-show="open" @click.outside="open=false"
+                     class="absolute bg-white text-black mt-2 rounded shadow w-40">
+                    <a class="block px-4 py-2 hover:bg-gray-100"
+                       href="{{ url_for('editor_crear') }}">
+                        Registrar
+                    </a>
+                    <a class="block px-4 py-2 hover:bg-gray-100"
+                       href="{{ url_for('editor_listar') }}">
+                        Ver listado
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="md:hidden px-4 pb-4" x-show="mobileMenu">
+
+        <a class="block py-2" href="{{ url_for('libros_listar') }}">Libros</a>
+        <a class="block py-2" href="{{ url_for('autores_listar') }}">Autores</a>
+        <a class="block py-2" href="{{ url_for('editor_listar') }}">Editores</a>
+
+    </div>
+
+</nav>
+
+<!-- CONTENIDO -->
+<main class="container mx-auto mt-6">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="text-center text-gray-500 mt-10 p-4">
+    CRUD Biblioteca Flask + Tailwind
+</footer>
+
+</body>
+</html>

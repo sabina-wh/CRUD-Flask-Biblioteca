@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="max-w-6xl mx-auto mt-10">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Lista de Autores</h2>
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div
+    class="mb-4 p-3 rounded text-white {% if category == 'success' %} bg-green-500 {% endif %} {% if category == 'error' %} bg-red-500 {% endif %}"
+  >
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <!-- TABLA -->
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+    <table class="min-w-full text-left">
+      <thead class="bg-gray-100 border-b">
+        <tr>
+          <th class="p-3">Apellidos</th>
+          <th class="p-3">Nombre</th>
+          <th class="p-3">Email</th>
+          <th class="p-3">ID</th>
+          <th class="p-3">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% if autores %} {% for autor in autores %}
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ autor.apellidos }}</td>
+          <td class="p-3">{{ autor.nombre }}</td>
+          <td class="p-3">{{ autor.email }}</td>
+          <td class="p-3">{{ autor.id }}</td>
+
+          <td class="p-3 flex gap-2">
+            <a
+              href="{{ url_for('autores_editar', id_autor=autor.id) }}"
+              class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+            >
+              Editar
+            </a>
+
+            <a
+              href="{{ url_for('autores_eliminar', id_autor=autor.id) }}"
+              class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+            >
+              Eliminar
+            </a>
+          </td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td colspan="5" class="p-4 text-center text-gray-500">
+            No se encontraron autores
+          </td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

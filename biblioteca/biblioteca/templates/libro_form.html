@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>Registrar Libro</h2>
+<br />
+
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+%}
+<ul class="messages">
+  {% for category, message in messages %}
+  <li class="alert alert-{{ category }}">{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+
+<form method="POST" enctype="multipart/form-data" novalidate>
+  {{ form.hidden_tag() }}
+
+  <div class="mb-3">
+    {{ form.titulo.label(class="form-label") }} {{
+    form.titulo(class="form-control") }} {% for error in form.titulo.errors %}
+    <span class="text-danger">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.autores.label(class="form-label") }} {{
+    form.autores(class="form-control") }} {% for error in form.autores.errors %}
+    <span class="text-danger">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.editor.label(class="form-label") }} {{
+    form.editor(class="form-control") }} {% for error in form.editor.errors %}
+    <span class="text-danger">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.fecha_publicacion.label(class="form-label") }} {{
+    form.fecha_publicacion(class="form-control") }} {% for error in
+    form.fecha_publicacion.errors %}
+    <span class="text-danger">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.portada.label(class="form-label") }} {{
+    form.portada(class="form-control") }} {% for error in form.portada.errors %}
+    <span class="text-danger">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <button
+    type="submit"
+    class="px-4 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-600 hover:text-white active:scale-95 transition duration-150"
+  >
+    Guardar
+  </button>
+</form>
+
+{% endblock %}

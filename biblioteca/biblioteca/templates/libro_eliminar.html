@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="max-w-xl mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
+
+    <h2 class="text-2xl font-bold text-red-600 mb-4">
+        Eliminar Libro
+    </h2>
+
+    <p class="text-gray-700 mb-6">
+        ¿Estás seguro que deseas eliminar el libro:
+        <span class="font-semibold">{{ libro.titulo }}</span>?
+    </p>
+
+    <form method="POST">
+        
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <button type="submit"
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+            Confirmar
+        </button>
+
+        <a href="{{ url_for('libros_listar') }}"
+            class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">
+            Cancelar
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}

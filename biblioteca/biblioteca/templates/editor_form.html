@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="max-w-2xl mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Registrar Editor</h2>
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div
+    class="mb-4 p-3 rounded text-white {% if category == 'success' %} bg-green-500 {% endif %} {% if category == 'error' %} bg-red-500 {% endif %}"
+  >
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <form method="POST" class="space-y-4">
+    <!-- CSRF si usas Flask-WTF -->
+    {{ form.csrf_token }}
+
+    <!-- Nombre -->
+    <div>
+      <label class="block text-gray-700">Nombre</label>
+      {{ form.nombre(class="w-full border rounded p-2 focus:ring
+      focus:ring-blue-300") }} {% for error in form.nombre.errors %}
+      <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Domicilio -->
+    <div>
+      <label class="block text-gray-700">Domicilio</label>
+      {{ form.domicilio(class="w-full border rounded p-2 focus:ring
+      focus:ring-blue-300") }} {% for error in form.domicilio.errors %}
+      <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Ciudad -->
+    <div>
+      <label class="block text-gray-700">Ciudad</label>
+      {{ form.ciudad(class="w-full border rounded p-2 focus:ring
+      focus:ring-blue-300") }} {% for error in form.ciudad.errors %}
+      <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Estado -->
+    <div>
+      <label class="block text-gray-700">Estado</label>
+      {{ form.estado(class="w-full border rounded p-2 focus:ring
+      focus:ring-blue-300") }} {% for error in form.estado.errors %}
+      <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- País -->
+    <div>
+      <label class="block text-gray-700">País</label>
+      {{ form.pais(class="w-full border rounded p-2 focus:ring
+      focus:ring-blue-300") }} {% for error in form.pais.errors %}
+      <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Sitio Web-->
+<div class="relative">
+    <label class="block text-gray-700">Sitio Web</label>
+    {{ form.website(class="w-full border rounded p-2 focus:ring focus:ring-blue-300", placeholder="https://www.ejemplo.com") }}
+    
+    <!-- Tooltip -->
+    <span class="absolute top-0 right-0 mt-2 mr-2 text-gray-500 text-sm"
+          title="Escriba la URL completa, por ejemplo: https://www.editorialnuevomexico.com.mx">
+        ℹ️
+    </span>
+
+    {% for error in form.website.errors %}
+        <p class="text-red-500 text-sm mt-1">{{ error }}</p>
+    {% endfor %}
+</div>
+
+
+  <button
+    type="submit"
+    class="px-4 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-600 hover:text-white active:scale-95 transition duration-150"
+  >
+    Guardar 
+  </button>
+</form>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto mt-10">
+
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">
+        Lista de Editores
+    </h2>
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="mb-4 p-3 rounded text-white
+                    {% if category == 'success' %} bg-green-500 {% endif %}
+                    {% if category == 'error' %} bg-red-500 {% endif %}
+                ">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- TABLA -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+
+        <table class="min-w-full text-left">
+
+            <thead class="bg-gray-100 border-b">
+                <tr>
+                    <th class="p-3">ID</th>
+                    <th class="p-3">Nombre</th>
+                    <th class="p-3">Domicilio</th>
+                    <th class="p-3">Ciudad</th>
+                    <th class="p-3">Estado</th>
+                    <th class="p-3">País</th>
+                    <th class="p-3">Website</th>
+                    <th class="p-3">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% if editores %}
+                    {% for editor in editores %}
+                        <tr class="border-b hover:bg-gray-50">
+
+                            <td class="p-3">{{ editor.id }}</td>
+                            <td class="p-3">{{ editor.nombre }}</td>
+                            <td class="p-3">{{ editor.domicilio }}</td>
+                            <td class="p-3">{{ editor.ciudad }}</td>
+                            <td class="p-3">{{ editor.estado }}</td>
+                            <td class="p-3">{{ editor.pais }}</td>
+                            <td class="p-3">{{ editor.website }}</td>
+
+                            <td class="p-3 flex gap-2">
+
+                                <a href="{{ url_for('editor_editar', id_editor=editor.id) }}"
+                                   class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+                                    Editar
+                                </a>
+
+                                <a href="{{ url_for('editor_eliminar', id_editor=editor.id) }}"
+                                   class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">
+                                    Eliminar
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="p-4 text-center text-gray-500">
+                            No se encontraron editores
+                        </td>
+                    </tr>
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

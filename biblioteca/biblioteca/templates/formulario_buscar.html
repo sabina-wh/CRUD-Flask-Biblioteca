@@ -1,0 +1,15 @@
+<form class="mb-4 flex gap-2" method="GET" action="{{ request.path }}">
+    <input
+        type="text"
+        name="q"
+        class="w-full border rounded p-2"
+        placeholder="Buscar..."
+        value="{{ q }}"
+    />
+    <button
+        type="submit"
+        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
+    >
+        Buscar
+    </button>
+</form>
